@@ -15,7 +15,7 @@ app_password = os.environ.get('APP_PASSWORD')
 msgRoot = MIMEMultipart('related')
 msgRoot['Subject'] = 'Monthly Budget Analysis'
 msgRoot['From'] = EMAIL_ADDRESS
-msgRoot['To'] = 'marvin.chan215@gmail.com'
+msgRoot['To'] = EMAIL_ADDRESS
 msgRoot.preamble = 'This is a multi-part message in MIME format.'
 
 # Encapsulate the plain and HTML versions of the message body in an
