@@ -5,6 +5,7 @@ import numpy as np
 from conditions import ledger
 from database import transactions_aggregate
 from transactions import end
+from matplotlib.ticker import ScalarFormatter
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
@@ -36,13 +37,15 @@ class Categories:
     plt.subplots_adjust(top=.85)
     chart.xaxis.grid(True)
     plt.tight_layout(True)
+    chart.set_xscale('log')
+    chart.xaxis.set_major_formatter(ScalarFormatter())
     plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'category.png', dpi = 300, bbox_inches='tight')
     return chart
     
 
 
-# expense_group = Categories(ledger).category_ledger()
-# cat_chart = Categories(expense_group).category_chart()
+expense_group = Categories(ledger).category_ledger()
+cat_chart = Categories(expense_group).category_chart()
 
 
 
