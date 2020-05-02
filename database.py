@@ -1,32 +1,29 @@
 import pandas as pd
 from sqlalchemy import create_engine, select, MetaData, Table, Integer, String, inspect, Column, ForeignKey
 import os
+# from conditions import ledger
 
 # print(os.path.abspath('.'))
 
 # establish connection
-engine = create_engine('sqlite:////Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/JupyterNotebook/transactions.db', echo=False)
+engine = create_engine('sqlite:////Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/transactions_ledger.db', echo=False)
 connection = engine.raw_connection()
 # to check all table names
 inspector = inspect(engine)
 
-SQL_Transactions = pd.read_sql_query('SELECT * FROM transactions_2019_aggregate',connection)
+print(inspector.get_table_names())
 
-SQL_Transactions
+def update_ledger():
+	ledger.to_sql('transactions_categorized_aggregate', connection, if_exists='append', index=False)
 
-# ledger = pd.read_csv('ledger.csv')
+# if __name__ == '__main__':
+# 	update_ledger()
 
-# ledger.to_sql('transactions_2019_categorized', connection, index=False, if_exists='replace')
+transactions_aggregate = pd.read_sql_query('SELECT * FROM transactions_categorized_aggregate', connection)
 
-categorized_transactions = pd.read_sql_query('SELECT * FROM transactions_2019_categorized', connection)
-
-
-
-categorized_transactions.to_csv('SQL_Ledger.csv', index=False)
-
+# transactions_aggregate.to_sql('transactions_categorized_aggregate', connection, if_exists='replace', index=False)
 connection.close()
-
 
 # print(inspector.get_table_names())
 
-
+# print(transactions_aggregate)

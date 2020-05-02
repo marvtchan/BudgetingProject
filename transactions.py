@@ -1,13 +1,23 @@
-
-from database import SQL_Transactions
 import pandas as pd
 import csv 
 import os
 from os import listdir
 from os.path import isfile, join
+import datetime
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
+
+# Get start and end date of previous month
+today = datetime.date.today()
+first = today.replace(day=1)
+end = first - datetime.timedelta(days=1)
+start = end.replace(day=1)
+start = start.isoformat()
+end = end.isoformat()
+print(start)
+print(end)
+
 
 # class for importing CSVs, pass folder_path for every month
 class Import_CSV:
@@ -37,8 +47,6 @@ class Import_CSV:
         df['Source'] = os.path.basename(file)
         df['Source'] = df['Source'].str.split('.').str[0]
 
-        if df['Source'].str.contains('American_Express').any():
-          df['Amount'] = df['Amount'] * -1
         aggregate_df.append(df)
 
     aggregate_df = pd.concat(aggregate_df)
@@ -58,8 +66,11 @@ class Transactions:
     self.ledger['Description'] = self.ledger['Description'].str.replace('*',' ')
     self.ledger['Category'] = self.ledger['Category'] = 'Uncategorized'
     self.ledger['Month'] = pd.to_datetime(self.ledger['Date']).dt.to_period('M')
+    self.ledger['Month'] = self.ledger['Month'].astype(str)
     self.ledger['Type'] = ''
     self.ledger['Type'] = ["Checkings" if type == "Bank_of_America" else "Credit Card" for type in self.ledger['Source']]
+    if self.ledger['Type'].str.contains('Credit Card').any():
+          self.ledger['Amount'] = self.ledger['Amount'] * -1
  
     return self.ledger
 
@@ -84,7 +95,7 @@ class Transactions:
 
 #passing path of file from the month
 
-file_path = "/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/2019/"
+file_path = "/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/" + end + "/"
 
 csv_list = Import_CSV(file_path).read_csv_list()
 
@@ -98,9 +109,6 @@ transactions = Import_CSV(file_path).read_csv(csv_list)
 ledger = Transactions(transactions).clean_transactions()
 
 # print(ledger)
-
-# print(ledger)
-
 
 
 

@@ -2,8 +2,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
-from database import SQL_Transactions
-from database import categorized_transactions
+from conditions import ledger
+from database import transactions_aggregate
+from transactions import end
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
@@ -24,24 +25,24 @@ class Categories:
     return expense_group
 
   def category_chart(self):        
-    plt.figure(figsize=(10,5))
+    plt.figure(figsize=(13,7))
     chart = sns.barplot(y = "Category", data=self.ledger, palette="pastel", x='Amount')
     # ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
     plt.xticks(rotation=0, horizontalalignment='right', fontweight='light', fontsize='small')
     figure_title = 'Expenses by Category'
-    plt.title(figure_title, fontsize=16, fontname='Arial', fontweight='bold', y =1.01) 
-    plt.ylabel('Expense',fontsize=12)
-    plt.xlabel('Amount',fontsize=12)
+    plt.title(figure_title, fontsize=16, fontname='Arial', fontweight='bold', x=.45, y =1.01) 
+    plt.xlabel('Amount',fontsize=12, x=.45)
+    plt.ylabel('')
     plt.subplots_adjust(top=.85)
     chart.xaxis.grid(True)
     plt.tight_layout(True)
-    plt.savefig('category.png')
+    plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'category.png', dpi = 300, bbox_inches='tight')
     return chart
     
 
 
-expense_group = Categories(categorized_transactions).category_ledger()
-cat_chart = Categories(expense_group).category_chart()
+# expense_group = Categories(ledger).category_ledger()
+# cat_chart = Categories(expense_group).category_chart()
 
 
 
@@ -62,7 +63,7 @@ class Monthly:
 
   def monthly_chart(self):
         # sns.set(style="whitegrid")
-    plt.figure(figsize=(10,5))
+    plt.figure(figsize=(10,7))
     ax = sns.barplot(y = "Amount", data=self.ledger, palette="GnBu_d", x='Month')
     # ax.set_xticklabels(ax.get_xticklabels(), rotation=45, horizontalalignment='right')
     plt.xticks(rotation=45, horizontalalignment='right', fontweight='light', fontsize='small')
@@ -73,14 +74,15 @@ class Monthly:
     # sns.despine(left=True, bottom=True)
     ax2 = ax.twinx()
     ax2.plot(ax.get_xticks(), self.ledger.Amount)
+    ax.get_shared_y_axes().join(ax,ax2)
     plt.grid(color='gray', linestyle='--')
-    plt.savefig('monthly.png')
+    plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'monthly.png', dpi = 300)
     return ax, ax2
 
 
-monthly_group = Monthly(categorized_transactions).monthly_ledger()
-monthly_chart = Monthly(monthly_group).monthly_chart()
-# monthly_chart.savefig('monthly.png')
+# monthly_group = Monthly(ledger).monthly_ledger()
+# monthly_chart = Monthly(monthly_group).monthly_chart()
+#monthly_chart.savefig('monthly.png')
 
 # print(monthly_group)
 # plt.show()
@@ -99,11 +101,11 @@ class Transaction:
         print(type(max_expense))
         max_expense = max_expense.to_string(index=False, header=None)
         print(type(max_expense))
-        print ("Your highest expense from the year was:") 
+        print ("Your highest expense from the month was:") 
         print(max_expense)
         return max_expense
 
-max_expense = Transaction(categorized_transactions).highest_expense()
+max_expense = Transaction(ledger).highest_expense()
 
 
 
@@ -135,13 +137,13 @@ class Income_Expense_Ratio:
         fig = plt.gcf()
         fig.gca().add_artist(centre_circle)
 
-        plt.suptitle('Expense to Income Ratio', fontsize=14, fontname='Arial', fontweight='bold')
+        plt.suptitle('Expense to Income Ratio', fontsize=14, fontname='Arial', fontweight='bold', y=.55 )
 
         ax1.axis('equal')  
         plt.tight_layout()
-        plt.savefig('in_out.png')
+        plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'in_out.png', dpi = 300)
 
-pie_ratio = Income_Expense_Ratio(categorized_transactions).in_out()
+# pie_ratio = Income_Expense_Ratio(ledger).in_out()
 
 
 

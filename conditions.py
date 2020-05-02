@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from database import SQL_Transactions
 from transactions import Transactions
 from transactions import ledger
 
@@ -42,7 +41,7 @@ gas = ('chevron', 'union', 'fuel', '7 eleven', 'shell', 'arco', '7-eleven', 'exx
 transfer = ('american express', 'capital one', 'robinhood', 'barclay', 'simple', 'online payment', 'autopay payment', 'transfer', 
             'balance', 'payment received', 'chase credit', 'payment thank you')
 
-bills = ('lemonade', 'comcast', 'pacific gas', 'pg&e', 'fee', 'at&t', 'windsor', 'allegro', 
+bills = ('lemonade', 'comcast', 'pacific gas', 'pg&e', 'pay fee', 'at&t', 'windsor', 'allegro', 
          'squarespace', 'at&', 'storage', 'todoist', 'gsuite', 'mailbird', 'adobe', 'actblue')
 
 gym_name = ('gym', 'ironworks')
@@ -79,9 +78,10 @@ Transactions(ledger).categorize(bills, categories[12])
 Transactions(ledger).categorize(entertainment, categories[14])
 Transactions(ledger).categorize(rewards, categories[15])
 Transactions(ledger).categorize(food, categories[2])
+Transactions(ledger).categorize_source(categories[2], "Chase")
 Transactions(ledger).categorize_source(categories[2], "Uber")
 
-ledger.ix[849, 'Category'] = 'Bills'
+# ledger.ix[849, 'Category'] = 'Bills'
 
 # expense or income?
 
@@ -89,10 +89,10 @@ income_categories= ['Income', 'Credit Card Reward']
 
 expense_categories= ['Rent', 'Food', 'Shopping', 'Gas', 'Travel', 'Pet', 'Gifts', 'Gym', 'Groceries', 'Bills', 'Uncategorized', 'Entertainment']
 
-print(ledger)
 
 
-ledger.to_csv('ledger.csv', index=False)
+
+# ledger.to_csv('ledger.csv', index=False)
 
 
-print(categories)
+# print(categories)
