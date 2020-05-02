@@ -105,7 +105,7 @@ if __name__ == '__main__':
 	def update_ledger():
 		ledger.to_sql('transactions_categorized_aggregate', connection, if_exists='append', index=False)
 
-	# update_ledger()
+	update_ledger()
 
 
 	transactions_aggregate_quarter = pd.read_sql_query(('SELECT * '
@@ -129,7 +129,7 @@ if __name__ == '__main__':
 	max_expense = Transaction(ledger).highest_expense()
 	pie_ratio = Income_Expense_Ratio(ledger).in_out()
 
-import email_automation_html
+	import email_automation_html
 
 
 
