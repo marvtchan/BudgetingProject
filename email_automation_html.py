@@ -47,7 +47,7 @@ html = ("""<!DOCTYPE html>
 	
 				<br><img src="cid:image2" max-width="800" height="500" ><br> 
 			
-			<b><p2>Your highest expense from the year was: %s</p2></b> 
+			<b><p2>Your highest expense from the month was: %s</p2></b> 
 
 			<br><p3>Below are your expenses by month: </p3> <br>
 			
