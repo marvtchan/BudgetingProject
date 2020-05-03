@@ -20,7 +20,7 @@ start = end_date.replace(day=1)
 start = start.isoformat()
 end = end_date.isoformat()
 
-new_dir ='/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/'
+new_dir ='/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/charts/'
 
 # Create the root message and fill in the from, to, and subject headers
 msgRoot = MIMEMultipart('related')

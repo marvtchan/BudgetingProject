@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
+import os
 from conditions import ledger
 from database import transactions_aggregate
 from transactions import end
@@ -12,6 +13,18 @@ pd.set_option('display.width', 1000)
 
 income_categories= ['Income', 'Credit Card Reward']
 expense_categories= ['Rent', 'Food', 'Shopping', 'Gas', 'Travel', 'Pet', 'Gifts', 'Gym', 'Groceries', 'Bills', 'Uncategorized', 'Entertainment']
+
+def make_dir(dir):
+    try:
+        # Create target Directory
+        os.mkdir(dir)
+        print("Directory " , dir ,  " Created ") 
+    except FileExistsError:
+        print("Directory " , dir ,  " already exists")
+
+
+new_dir ='/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/charts/' 
+make_dir(new_dir)
 
 class Categories:
   def __init__(self, ledger):
@@ -39,13 +52,13 @@ class Categories:
     plt.tight_layout(True)
     chart.set_xscale('log')
     chart.xaxis.set_major_formatter(ScalarFormatter())
-    plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'category.png', dpi = 300, bbox_inches='tight')
+    plt.savefig(new_dir + 'category.png', dpi = 300, bbox_inches='tight')
     return chart
     
 
 
-expense_group = Categories(ledger).category_ledger()
-cat_chart = Categories(expense_group).category_chart()
+# expense_group = Categories(ledger).category_ledger()
+# cat_chart = Categories(expense_group).category_chart()
 
 
 
@@ -79,7 +92,7 @@ class Monthly:
     ax2.plot(ax.get_xticks(), self.ledger.Amount)
     ax.get_shared_y_axes().join(ax,ax2)
     plt.grid(color='gray', linestyle='--')
-    plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'monthly.png', dpi = 300)
+    plt.savefig(new_dir + 'monthly.png', dpi = 300)
     return ax, ax2
 
 
@@ -144,7 +157,7 @@ class Income_Expense_Ratio:
 
         ax1.axis('equal')  
         plt.tight_layout()
-        plt.savefig('/Users/marvinchan/Documents/PythonProgramming/DatabaseforStatements/BudgetingProject/' + end + '/' 'in_out.png', dpi = 300)
+        plt.savefig(new_dir + 'in_out.png', dpi = 300)
 
 # pie_ratio = Income_Expense_Ratio(ledger).in_out()
 

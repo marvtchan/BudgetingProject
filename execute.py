@@ -105,7 +105,7 @@ if __name__ == '__main__':
 	def update_ledger():
 		ledger.to_sql('transactions_categorized_aggregate', connection, if_exists='append', index=False)
 
-	update_ledger()
+	# update_ledger()
 
 
 	transactions_aggregate_quarter = pd.read_sql_query(('SELECT * '
@@ -123,6 +123,7 @@ if __name__ == '__main__':
 	from data_analysis import Categories, Monthly, Transaction, Income_Expense_Ratio
 
 	expense_group = Categories(ledger).category_ledger()
+	
 	cat_chart = Categories(expense_group).category_chart()
 	monthly_group = Monthly(transactions_aggregate_quarter).monthly_ledger()
 	monthly_chart = Monthly(monthly_group).monthly_chart()
