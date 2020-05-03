@@ -17,6 +17,8 @@ Analyses includes:
 Categorical, Monthly (past QTD), and Income to Expense Ratio
 
 ![category](https://user-images.githubusercontent.com/49408616/80895588-704aef00-8c9b-11ea-8202-7e63a674c798.png)
+![monthly](https://user-images.githubusercontent.com/49408616/80895600-8789dc80-8c9b-11ea-8b84-20d7a69ca904.png)
+
 
 Categorization is built off of conditions from my own prior history. 
 
