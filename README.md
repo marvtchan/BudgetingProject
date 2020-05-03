@@ -12,7 +12,7 @@ Analysis is done with charts from matplotlib and seaborn.
 
 In order to use this program, create a database prior to running execute.py.
 
-Analysis includes: 
+Analyses includes: 
 
 Categorical, Monthly (past QTD), and Income to Expense Ratio
 
