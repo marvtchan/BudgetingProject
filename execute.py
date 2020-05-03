@@ -35,9 +35,7 @@ quarter_start = three_months.replace(day=1) + dateutil.relativedelta.relativedel
 quarter_start = quarter_start.isoformat()
 print(quarter_start)
 
-
-
-
+# Make new directory for related month
 def make_dir(dir):
 	try:
 	    # Create target Directory
@@ -81,25 +79,6 @@ if __name__ == '__main__':
 
 	from conditions import *
 
-	Transactions(ledger).categorize(income_sources, categories[0])
-	Transactions(ledger).categorize_expense_amount(rent, categories[1], rent_amount)
-	Transactions(ledger).categorize(shopping, categories[3])
-	Transactions(ledger).categorize(gas, categories[4])
-	Transactions(ledger).categorize(transfer, categories[10])
-	Transactions(ledger).categorize(travel, categories[5])
-	Transactions(ledger).categorize(cash, categories[6])
-	Transactions(ledger).categorize(pet, categories[7])
-	Transactions(ledger).categorize(gifts, categories[8])
-	Transactions(ledger).categorize(gym_name, categories[9])
-	Transactions(ledger).categorize(transfer, categories[10])
-	Transactions(ledger).categorize(groceries, categories[11])
-	Transactions(ledger).categorize(bills, categories[12])
-	Transactions(ledger).categorize(entertainment, categories[14])
-	Transactions(ledger).categorize(rewards, categories[15])
-	Transactions(ledger).categorize(food, categories[2])
-	Transactions(ledger).categorize_source(categories[2], "Chase")
-	Transactions(ledger).categorize_source(categories[2], "Uber")
-
 # print(ledger)
 
 	def update_ledger():
@@ -113,8 +92,6 @@ if __name__ == '__main__':
 													   'where transactions_categorized_aggregate.Date between ?  and ?'), connection, params=[quarter_start,end])
 
 	connection.close()
-
-
 
 	# print(inspector.get_table_names())
 
