@@ -1,6 +1,4 @@
-README.md
-
-Budgeting Project
+# Budgeting Project
 
 This project is made for everyday users who want an automated tracking of their budget. 
 
