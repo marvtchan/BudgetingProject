@@ -36,10 +36,8 @@ class Predictor:
 		transaction_x = [x.description for x in transaction]
 		x = vectorizer.transform(transaction_x)
 		self.ledger['Category'] = loaded_clf.predict(x)
-		print (x)
 		return self.ledger['Category']
 
 
 Predictor(ledger).categorize_transactions()
 
-# print(ledger)

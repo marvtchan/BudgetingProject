@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
 	ledger = Transactions(transactions).clean_transactions()
 
-	from conditions import *
+	from transactions_predictor import *
 
 # print(ledger)
 
@@ -91,6 +91,9 @@ if __name__ == '__main__':
 													   'FROM transactions_categorized_aggregate '
 													   'where transactions_categorized_aggregate.Date between ?  and ?'), connection, params=[quarter_start,end])
 
+
+	print(transactions_aggregate_quarter)
+	transactions_aggregate_quarter.to_csv('check.csv')
 	connection.close()
 
 	# print(inspector.get_table_names())
@@ -98,6 +101,11 @@ if __name__ == '__main__':
 	# print(transactions_aggregate_quarter)
 
 	from data_analysis import Categories, Monthly, Transaction, Income_Expense_Ratio
+
+
+	income_categories= ['Income', 'Credit Card Reward']
+
+	expense_categories= ['Rent', 'Food', 'Shopping', 'Gas', 'Travel', 'Pet', 'Gifts', 'Gym', 'Groceries', 'Bills', 'Uncategorized', 'Entertainment']
 
 	expense_group = Categories(ledger).category_ledger()
 	
