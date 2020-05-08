@@ -8,7 +8,7 @@ Within the depository there is a Plaid API that pulls transactions from the prio
 With that data, pandas is used to clean, categorize, and prepare for analysis. An SVM model is used for categorizing transactions. The model uses previous transaction data with a 90% accuracy rate.
 
 With that data, pandas is used to clean, categorize, and prepare for analysis.
-Categorization is used with an SVM model from previous data. This model is catered specifically to my own past transactions showing a 90$ accuracy rate. 
+Categorization is used with an SVM model from previous data. This model is catered specifically to my own past transactions showing a 90% accuracy rate. 
 
 
 Analysis is done with charts from matplotlib and seaborn.
