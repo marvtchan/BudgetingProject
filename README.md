@@ -9,6 +9,10 @@ Categorization is used with an SVM model from previous data. This model is cater
 
 ![image](https://user-images.githubusercontent.com/49408616/81507686-e068fe80-92b3-11ea-8684-7f653c2cd8f2.png)
 
+Below is a confusion matrix showing where the inaccuracies stem from. The model mostly shows that it has difficulty with differentiating Food with Bills, Groceries, Entertainment, and Shopping.
+
+![confusion](https://user-images.githubusercontent.com/49408616/81508027-4d7d9380-92b6-11ea-8fe6-ae6137a3d3f2.png)
+
 
 Analysis is done with charts from matplotlib and seaborn.
 
