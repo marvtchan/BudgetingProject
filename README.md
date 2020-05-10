@@ -5,7 +5,9 @@ This project is made for everyday users who want an automated tracking of their 
 Within the depository there is a Plaid API that pulls transactions from the prior month and adds to a SQLite database.
 
 With that data, pandas is used to clean, categorize, and prepare for analysis.
-Categorization is used with an SVM model from previous data. This model is catered specifically to my own past transactions showing a 90% accuracy rate. 
+Categorization is used with an SVM model from previous data. This model is catered specifically to my own past transactions showing a 92% accuracy rate. 
+
+![image](https://user-images.githubusercontent.com/49408616/81492883-8edb5800-9250-11ea-80eb-57d0475196aa.png)
 
 
 Analysis is done with charts from matplotlib and seaborn.

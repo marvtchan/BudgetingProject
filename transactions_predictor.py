@@ -8,7 +8,6 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import GridSearchCV
 from sklearn import svm
 import pickle
-from train_model import vectorizer
 pd.set_option('display.max_rows', 1200)
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
@@ -18,20 +17,26 @@ pd.set_option('display.width', 1000)
 with open('categorizer.pkl', 'rb') as f:
     loaded_clf = pickle.load(f)
 
+with open('vectorizer.pkl', 'rb') as f:
+    vectorizer = pickle.load(f)
+
 
 
 
 class Transactions:
+	"""Initiate object for each transaction line"""
     def __init__(self, description, category, amount):
         self.description = description
         self.category = category
         self.amount = amount
 
 class Predictor:
+	"""Return predicted category for each transaction"""
 	def __init__(self, ledger):
 		self.ledger = ledger
 
 	def categorize_transactions(self):
+		"""Return category of each transaction to new column"""
 		transaction = [(Transactions(row.Description,row.Category,row.Amount)) for index, row in self.ledger.iterrows() ] 
 		transaction_x = [x.description for x in transaction]
 		x = vectorizer.transform(transaction_x)
@@ -40,4 +45,6 @@ class Predictor:
 
 
 Predictor(ledger).categorize_transactions()
+
+
 

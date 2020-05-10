@@ -18,8 +18,6 @@ BOFA = os.getenv('BOFA_ACCESS_TOKEN')
 AMEX = os.getenv('AMEX_ACCESS_TOKEN')
 UBER = os.getenv('UBER_ACCESS_TOKEN')
 
-
-
 # Get start and end date of previous month
 
 today = datetime.date.today()
@@ -28,12 +26,10 @@ end_date = first - datetime.timedelta(days=1)
 start = end_date.replace(day=1)
 start = start.isoformat()
 end = end_date.isoformat()
-print(start)
-print(end)
 three_months = end_date - dateutil.relativedelta.relativedelta(months=3) 
 quarter_start = three_months.replace(day=1) + dateutil.relativedelta.relativedelta(months=1)
 quarter_start = quarter_start.isoformat()
-print(quarter_start)
+
 
 # Make new directory for related month
 def make_dir(dir):
@@ -79,8 +75,6 @@ if __name__ == '__main__':
 
 	from transactions_predictor import *
 
-# print(ledger)
-
 	def update_ledger():
 		ledger.to_sql('transactions_categorized_aggregate', connection, if_exists='append', index=False)
 
@@ -92,13 +86,9 @@ if __name__ == '__main__':
 													   'where transactions_categorized_aggregate.Date between ?  and ?'), connection, params=[quarter_start,end])
 
 
-	print(transactions_aggregate_quarter)
-	transactions_aggregate_quarter.to_csv('check.csv')
+
 	connection.close()
 
-	# print(inspector.get_table_names())
-
-	# print(transactions_aggregate_quarter)
 
 	from data_analysis import Categories, Monthly, Transaction, Income_Expense_Ratio
 
@@ -114,6 +104,7 @@ if __name__ == '__main__':
 	monthly_chart = Monthly(monthly_group).monthly_chart()
 	max_expense = Transaction(ledger).highest_expense()
 	pie_ratio = Income_Expense_Ratio(ledger).in_out()
+
 
 	import email_automation_html
 
