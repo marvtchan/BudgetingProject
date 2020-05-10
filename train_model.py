@@ -22,8 +22,8 @@ end = "2020-04-30"
 
 # Query data all-time
 transactions_aggregate_categorized = pd.read_sql_query(('SELECT * '
-													   'FROM transactions_categorized_aggregate '
-													   'where transactions_categorized_aggregate.Date between ?  and ?'), connection, params=[start,end])
+													   'FROM transactions_categorized_train '
+													   ), connection)
 
 # establish categories
 def _read_categories():

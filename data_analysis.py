@@ -99,6 +99,8 @@ class Transaction:
         max_expense = max_expense.to_string(index=False, header=None)
         return max_expense
 
+max_expense = Transaction(ledger).highest_expense()
+
 class Income_Expense_Ratio:
     """Initiate class for Income to Expense Ratio by %"""
     def __init__(self,ledger):

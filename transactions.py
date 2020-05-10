@@ -64,6 +64,9 @@ class Transactions:
     self.ledger['Amount'] = self.ledger['Amount'].fillna(0).astype(int)
     self.ledger['Description'] = self.ledger['Description'].str.lower()
     self.ledger['Description'] = self.ledger['Description'].str.replace('*',' ')
+    self.ledger['Description'] = self.ledger['Description'].replace('[^a-zA-Z ]', '', regex=True)
+    self.ledger.loc[self.ledger['Description'].str.contains('windsor'), 'Description'] = 'windsor'
+    self.ledger.loc[self.ledger['Description'].str.contains('paypal'), 'Description'] = 'paypal'
     self.ledger['Category'] = self.ledger['Category'] = 'Uncategorized'
     self.ledger['Month'] = pd.to_datetime(self.ledger['Date']).dt.to_period('M')
     self.ledger['Month'] = self.ledger['Month'].astype(str)
@@ -71,7 +74,7 @@ class Transactions:
     self.ledger['Type'] = ["Checkings" if type == "Bank_of_America" else "Credit Card" for type in self.ledger['Source']]
     if self.ledger['Type'].str.contains('Credit Card').any():
           self.ledger['Amount'] = self.ledger['Amount'] * -1
- 
+    self.ledger['Train'] = self.ledger['Description'] + ' ' + self.ledger['Amount'].astype(str)
     return self.ledger
 
 # categorizing expenses that only have condition parameter

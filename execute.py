@@ -105,6 +105,8 @@ if __name__ == '__main__':
 	max_expense = Transaction(ledger).highest_expense()
 	pie_ratio = Income_Expense_Ratio(ledger).in_out()
 
+	print(ledger.sort_values(by=['Amount']))
+
 
 	import email_automation_html
 

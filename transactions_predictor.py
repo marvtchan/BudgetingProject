@@ -25,10 +25,9 @@ with open('vectorizer.pkl', 'rb') as f:
 
 class Transactions:
 	"""Initiate object for each transaction line"""
-    def __init__(self, description, category, amount):
-        self.description = description
-        self.category = category
-        self.amount = amount
+	def __init__(self, description, category):
+	    self.description = description
+	    self.category = category
 
 class Predictor:
 	"""Return predicted category for each transaction"""
@@ -37,7 +36,7 @@ class Predictor:
 
 	def categorize_transactions(self):
 		"""Return category of each transaction to new column"""
-		transaction = [(Transactions(row.Description,row.Category,row.Amount)) for index, row in self.ledger.iterrows() ] 
+		transaction = [(Transactions(row.Train,row.Category)) for index, row in self.ledger.iterrows() ] 
 		transaction_x = [x.description for x in transaction]
 		x = vectorizer.transform(transaction_x)
 		self.ledger['Category'] = loaded_clf.predict(x)
