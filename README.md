@@ -29,3 +29,7 @@ Categorical, Monthly (past 3 months), and Income to Expense Ratio
 
 Categorization is built off of conditions from my own prior history. 
 
+Analysis and data is then emailed to the user.
+
+This application is set to run on the first day of every month using cron.
+
